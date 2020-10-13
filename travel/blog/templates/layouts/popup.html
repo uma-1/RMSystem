@@ -1,0 +1,17 @@
+{% load static %}
+<div class="container">
+    <div class="row">
+        <div id="boxes">
+            {% for popup in popupdata %}
+            <div style="top: 50%; left: 50%,right: 50%; display: none;" id="dialog" class="window">
+                <div id="san"> <h3 style="margin-bottom:-10px;"> {{popup.name}}</h3>
+                    <a class="close agree"><i class="fa fa-window-close" aria-hidden="true"> </i></a>
+                    <img src="{{popup.image.url}}" width="450">
+                </div>
+            </div>
+            <div style="width: 2478px; font-size: 32pt; color:white; height: 1202px; display: none; opacity: 0.4;"
+                 id="mask"></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

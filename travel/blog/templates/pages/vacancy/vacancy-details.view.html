@@ -1,0 +1,234 @@
+{% extends 'master/master.view.html' %}
+{% block content %}
+
+{% if vacancydetails.status == 1 %}
+<section class="main-content detail">
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-md-8">
+                <div class="detail-content content-wrapper">
+                    <div class="detail-info">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div {% if message.tags %} class="{{message.tags}}" {% endif %} role="alert">
+                            {{message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if VacancyForm.errors %}
+
+                        {% for field in VacancyForm %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissible">
+                           {{ error|escape }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+
+                        {% for error in VacancyForm.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissible">
+                            {{ error|escape }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                        <div class="detail-info-content clearfix">
+                            <h2>{{vacancydetails.title}}</h2>
+                            <p class="detail-info-price"><span
+                                    style="color:red"> Deadline : {{vacancydetails.lastdate}}</span></p>
+                            <div class="deal-rating">
+                                <span style="color:blue"> No.of Vacancy : {{vacancydetails.vacancynum}}</span>
+                                &nbsp; <i class="fa fa-eye" aria-hidden="true"></i> {{vacancydetails.page_visit}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="description detail-box">
+                        <div class="description-content">
+                            <table>
+                                <tbody>
+                                <th style="color:blue" colspan="2"> Basic Job Information</th>
+                                <tr>
+                                    <td class="title">Job Level</td>
+                                    <td> {{vacancydetails.level}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Employment Type</td>
+                                    <td> {{vacancydetails.type}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Job Location</td>
+                                    <td>{{vacancydetails.location}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Salary</td>
+                                    <td>{{vacancydetails.salary}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Education Level</td>
+                                    <td>{{vacancydetails.educationlevel}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Experience</td>
+                                    <td>{{vacancydetails.experience}}</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="description detail-box">
+                        <div class="description-content">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td> {{vacancydetails.job_specification| safe}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="description detail-box">
+                        <div class="description-content">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td> {{vacancydetails.job_description| safe}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="description detail-box">
+                        <div class="description-content">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td class="title"> Apply Procedure</td>
+                                    <td><i> {{vacancydetails.apply_procedure| safe}} </i></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="title"> Notes</td>
+                                    <td><em> {{vacancydetails.notes| safe}} </em></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div id="sidebar-sticky" class="col-md-4">
+                <aside class="detail-sidebar sidebar-wrapper">
+                    <div class="sidebar-item sidebar-item-dark">
+                        <div class="detail-title">
+                            <h3>Apply for this post</h3>
+                        </div>
+                        <form id=form name=form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col-xs-12">
+                                    {{VacancyForm.name}}
+                                </div>
+                                <div class="form-group col-xs-6">
+                                    {{VacancyForm.email}}
+                                </div>
+                                <div class="form-group col-xs-6 col-left-padding">
+                                    {{VacancyForm.phone}}
+                                </div>
+
+                                <div class="form-group col-xs-12 col-left-padding"
+                                     style="color:white;font-family:verdana;">
+                                    &nbsp;&nbsp; <strong>Photo :</strong>
+                                    <h9 style="font-size:10px;color:white;font-family:verdana;">(jpg & png photo are
+                                        accepted less than 1 mb)
+                                    </h9>
+                                    {{VacancyForm.photo}}
+
+                                </div>
+
+                                <div class="form-group col-xs-12 col-left-padding"
+                                     style="color:white;font-family:verdana;">
+                                    &nbsp;&nbsp; <strong>Resume :</strong>
+                                    <h9 style="font-size:10px;color:white;font-family:verdana;">(pdf & doc file are
+                                        accepted less than 1mb)
+                                    </h9>
+                                    {{VacancyForm.cv}}
+                                </div>
+                                <div class="form-group col-xs-12" style="color:white;font-family:verdana;">
+                                    <strong for="apply">Applying for :</strong>
+                                    <select id="id_position" name="position">
+                                        <option value={{vacancydetails.slug}}>{{vacancydetails.title}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="comment-btn">
+                                        <input type="submit" class="btn-blue btn-red" id="apply" value="Apply"
+                                               name="vacancy_apply"
+                                               data-toggle="tooltip"
+                                               data-placement="bottom"
+                                               title="Please make sure Photo and Resume is in .jpg & pdf formate">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class=" sidebar-item sidebar-helpline">
+                        <div class="sidebar-helpline-content">
+                            <h3>Any Questions?</h3>
+                            {% for contact in contactData %}
+                            <p> {{contact.slogan}}</p>
+                            <p><i class="flaticon-phone-call"></i> {{contact.contact}}</p>
+                            <p><i class="flaticon-mail"></i> {{contact.email}}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+{% else %}
+<!-- Error -->
+<section class="error">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="error-content text-center">
+                    <div class="error-box">
+                        <div class="error-box-inner">
+                            <h1>404</h1>
+                        </div>
+                    </div>
+                    <h2 class="page-title">Vacancy for <u>{{vacancydetails.title}}</u> has been expired</h2>
+                    <p>Go home by <a href="{% url 'index' %}">Clicking here.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Error Ends -->
+{% endif %}
+
+
+{% endblock %}

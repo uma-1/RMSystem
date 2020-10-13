@@ -1,0 +1,266 @@
+{% extends 'master/master.view.html' %}
+
+{% block content %}
+
+
+<!-- Breadcrumb -->
+<section class="breadcrumb-outer text-center">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2>{{destinationdetails.title}}</h2>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a>Destination</a></li>
+                     <li class="breadcrumb-item"><a>{{destinationdetails.category}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{destinationdetails.title}}</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="section-overlay"></div>
+</section>
+<!-- BreadCrumb Ends -->
+
+<section class="main-content detail">
+
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-md-8">
+                <div class="detail-content content-wrapper">
+                    <div class="detail-info">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div {% if message.tags %} class="{{message.tags}}" {% endif %} role="alert">
+                            {{message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        {% endfor %}
+                        {% endif %}
+                        <div class="detail-info-content clearfix">
+                            <h2>{{destinationdetails.title}}</h2>
+                            <p class="detail-info-price" style="font-family:Montserrat"><span class="bold">{{destinationdetails.price}}</span>
+                            </p>
+                            <div class="deal-rating">
+                                {% with ''|center:destinationdetails.star as range %}
+                                {% for i in range %}
+                                <span class="fa fa-star checked"></span>
+                                {% endfor %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery detail-box">
+                        <!-- Paradise Slider -->
+                        <div id="in_th_030"
+                             class="carousel slide in_th_brdr_img_030 thumb_scroll_x swipe_x ps_easeOutQuint"
+                             data-ride="carousel" data-pause="hover" data-interval="4000" data-duration="2000">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+
+                                <li data-target="#in_th_030" data-slide-to="0" class="active">
+                                    <img src="{{destinationdetails.image.url}}" alt="in_th_030_01_sm"/>
+                                </li>
+
+                                <li data-target="#in_th_030" data-slide-to="1">
+                                    <img src="{{destinationdetails.image1.url}}" alt="in_th_030_02_sm"/>
+                                </li>
+
+                                <li data-target="#in_th_030" data-slide-to="2">
+                                    <img src="{{destinationdetails.image2.url}}" alt="in_th_030_03_sm"/>
+                                </li>
+                                <li data-target="#in_th_030" data-slide-to="3">
+                                    <img src="{{destinationdetails.image3.url}}" alt="in_th_030_04_sm"/>
+                                </li>
+                                <li data-target="#in_th_030" data-slide-to="4">
+                                    <img src="{{destinationdetails.image4.url}}" alt="in_th_030_05_sm"/>
+                                </li>
+                            </ol> <!-- /Indicators -->
+                            <!-- Wrapper For Slides -->
+                            <div class="carousel-inner" role="listbox">
+                                <!-- First Slide -->
+                                <div class="item active">
+                                    <!-- Slide Background -->
+                                    <img src="{{destinationdetails.image.url}}" alt="in_th_030_01"/>
+                                </div>
+                                <!-- End of Slide -->
+                                <!-- Second Slide -->
+                                <div class="item">
+                                    <!-- Slide Background -->
+                                    <img src="{{destinationdetails.image1.url}}" alt="in_th_030_02"/>
+                                </div>
+                                <!-- End of Slide -->
+                                <!-- Third Slide -->
+                                <div class="item">
+                                    <!-- Slide Background -->
+                                    <img src="{{destinationdetails.image2.url}}" alt="in_th_030_03"/>
+                                </div>
+                                <!-- End of Slide -->
+                                <div class="item">
+                                    <!-- Slide Background -->
+                                    <img src="{{destinationdetails.image3.url}}" alt="in_th_030_04"/>
+                                </div>
+                                <div class="item">
+                                    <!-- Slide Background -->
+                                    <img src="{{destinationdetails.image4.url}}" alt="in_th_030_05"/>
+                                </div>
+                            </div> <!-- End of Wrapper For Slides -->
+                        </div> <!-- End Paradise Slider -->
+                    </div>
+                    <div class="description detail-box">
+                        <div class="detail-title">
+                            <h3>Description</h3>
+                        </div>
+                        <div class="description-content">
+                            <p>{{destinationdetails.description | safe}}</p>
+                            <table>
+                                <thead>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="title">Languages</td>
+                                    <td><i class="fa fa-file-audio-o" aria-hidden="true"></i>
+                                        {{destinationdetails.language}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Includes</td>
+                                    <td>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                        {{destinationdetails.include|safe}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Excludes</td>
+                                    <td class="excludes">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                        {{destinationdetails.exclude|safe}}
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="detail-timeline detail-box">
+                        <div class="detail-title">
+                            <h3>Tour Timeline</h3>
+                        </div>
+                        <div class="timeline-content">
+                            <ul class="timeline">
+                                <!-- Item 1 -->
+                                <li>
+                                    <div class="direction-r">
+                                        <div class="day-wrapper">
+                                            <span class="fa fa-star checked"></span>
+                                        </div>
+                                        <div class="flag-wrapper">
+                                            <span class="flag">Itenary</span>
+                                        </div>
+                                        <div class="desc">
+                                            {{destinationdetails.itenary | safe}}
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sidebar-sticky" class="col-md-4">
+                <aside class="detail-sidebar sidebar-wrapper">
+                    <div class="sidebar-item sidebar-item-dark">
+                        <div class="detail-title">
+                            <h3>Book this tour</h3>
+                        </div>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col-xs-12">
+                                    {{destinationForm.name}}
+                                </div>
+                                <div class="form-group col-xs-6">
+                                    {{destinationForm.email}}
+                                </div>
+                                <div class="form-group col-xs-6 col-left-padding">
+                                    {{destinationForm.contact}}
+                                </div>
+                                <div class="form-group col-xs-6">
+                                    <strong style="color:white;font-family:verdana;">Depature Date :</strong>
+                                    {{destinationForm.depature}}
+                                </div>
+                                <div class="form-group col-xs-6 col-left-padding">
+                                    <br>
+                                    {{destinationForm.person}}
+                                </div>
+                                <div class="form-group col-xs-12" style="color:white;font-family:verdana;">
+                                    <strong for="apply">Destination :</strong>
+                                    <select id="id_destination" name="destination_name">
+                                        <option value={{destinationdetails.slug}}>{{destinationdetails.title}}</option>
+                                    </select>
+                                </div>
+                                <div class="textarea col-xs-12">
+                                    {{destinationForm.message}}
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="comment-btn">
+                                        <input type="submit" class="btn-blue btn-red" id="booking" value="Book Now"
+                                               name="booking">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="detail-title">
+                            <h3>Popular Packages</h3>
+                        </div>
+                        <div class="sidebar-content sidebar-slider">
+                            {% for destination in destinationData %}
+                            <div class="sidebar-package">
+                                <div class="sidebar-package-image">
+                                    <img src="{{destination.image.url}}" alt="Images" height="200">
+                                </div>
+                                <div class="destination-content sidebar-package-content">
+                                    <h4>
+                                        <a href="{% url 'destination-details' destination.slug %}">{{destination.title}}</a>
+                                    </h4>
+                                    <div class="deal-rating">
+                                        {% with ''|center:destination.star as range %}
+                                        {% for i in range %}
+                                        <span class="fa fa-star checked"></span>
+                                        {% endfor %}
+                                        {% endwith %}
+
+                                    </div>
+                                    <p>{{destination.price}}</span> </p>
+                                    <a href="#" class="btn-blue btn-red">Book Now</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <div class="sidebar-item sidebar-helpline">
+                        <div class="sidebar-helpline-content">
+                            <h3>Any Questions?</h3>
+                            {% for contact in contactData %}
+                            <p>{{contact.slogan}}.</p>
+
+                            <p><i class="flaticon-phone-call"></i> {{contact.contact}}</p>
+                            <p><i class="flaticon-mail"></i> {{contact.email}}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

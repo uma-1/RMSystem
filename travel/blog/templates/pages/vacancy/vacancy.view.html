@@ -1,0 +1,129 @@
+{% extends 'master/master.view.html' %}
+{% block content %}
+{% include 'layouts/message.view.html' %}
+<!-- Breadcrumb -->
+<section class="breadcrumb-outer text-center">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2>Career</h2>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page">Career</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="section-overlay"></div>
+</section>
+<!-- BreadCrumb Ends -->
+
+{% if vacancyData %}
+<section class="main-content detail">
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col-md-8">
+                <div class="detail-content content-wrapper">
+                    <div class="detail-info">
+                        <div class="detail-info-content clearfix">
+                            <h2>Vacancy</h2>
+                        </div>
+                    </div>
+                    <div class="description detail-box">
+                        <div class="detail-title">
+                            <h3>Job List</h3>
+                        </div>
+                        <div class="description-content">
+                            <table>
+                                <thead>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <th class="title">Job Title</th>
+                                    <th class="title">No. of Vacancy</th>
+                                    <th class="title">Deadline</th>
+                                    <th class="title">Details</th>
+                                </tr>
+                                {% for vacancy in vacancyData %}
+
+                                <tr>
+                                    <td class="title">{{vacancy.title}}</td>
+                                    <td class="title"> {{vacancy.vacancynum}}</td>
+                                    <td class="title">{{vacancy.lastdate}}</td>
+                                    <td>
+                                        <a href="{% url 'vacancy-details' vacancy.slug %}"
+                                           class="btn-blue btn-red"
+                                           data-toggle="tooltip"
+                                           data-placement="bottom"
+                                           title="Click Here To See Details">
+                                            Details
+                                        </a>
+                                    </td>
+                                </tr>
+
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sidebar-sticky" class="col-md-4">
+                <aside class="detail-sidebar sidebar-wrapper">
+                    <div class="sidebar-item sidebar-item-dark">
+                        <div class="detail-title">
+                            <h3>What we offer</h3>
+                        </div>
+                        <div>
+                            <p style="color:white;font-family:verdana;">
+                                At Teenkanya, we care about our people and their
+                                development. Here you will find opportunities for continued education and training. We
+                                are working on the process and strategies to empower our people through leadership
+                                programs. At Teenkanya, we are committed to help our people learn, develop & enhance
+                                their functional skills, leadership capabilities & personal effectiveness. Our
+                                leadership development focuses developing leaders who think before they act and act
+                                according to the values that the organization embraces.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class=" sidebar-item sidebar-helpline">
+                        <div class="sidebar-helpline-content">
+                            <h3>Any Questions?</h3>
+                            {% for contact in contactData %}
+                            <p> {{contact.slogan}}</p>
+                            <p><i class="flaticon-phone-call"></i> {{contact.contact}}</p>
+                            <p><i class="flaticon-mail"></i> {{contact.email}}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="error">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="error-content text-center">
+                    <div class="error-box">
+                        <div class="error-box-inner">
+                            <h1>No</h1>
+                        </div>
+                    </div>
+                    <h2 class="page-title">No Vacancy is available</h2>
+                    <p>Go home by <a href="{% url 'index' %}">Clicking here.</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+{% endblock %}

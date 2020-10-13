@@ -1,0 +1,36 @@
+{% extends 'dashboard/dashboard_side.html' %}
+{% block content %}
+
+<div class="dashboard-content">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12 traffic">
+            <div class="dashboard-list-box">
+                <div class="table-box">
+                      <h4 class="gray">New User Register</h4>
+                    <form action="" method="post">
+                        <div class="row">
+                            {{ form.email.errors }}
+                            <div class="form-group col-xs-12">
+                                {% csrf_token %}
+                                <table class="basic-table">
+                                    <tbody> {{ userForm }}</tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="comment-btn">
+                                    <input class="btn-blue btn-red" type="submit" value="Register">
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

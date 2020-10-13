@@ -1,0 +1,33 @@
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="testimonial1-slider" class="owl-carousel">
+                {% for testimonial in testimonialData %}
+                <div class="testimonial1">
+                    <div class="content">
+                        <p class="description" style="text-align: justify;">
+                            {{testimonial.description}}
+                        </p>
+                    </div>
+                    <div class="testimonial1-pic">
+                        <img src="{{testimonial.image.url}}" alt="">
+                    </div>
+                    <div class="testimonial1-review">
+                        <h3 class="testimonial1-title">{{testimonial.name}}</h3>
+                        <span>{{testimonial.profession}}</span>
+                        <ul class="social-links">
+                            <li><a href="{{testimonial.twitter}}" class="fa fa-twitter"></a></li>
+                            <li><a href="{{testimonial.facebook}}" class="fa fa-facebook"></a></li>
+                            <li><a href="{{testimonial.instagram}}" class="fa fa-instagram"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

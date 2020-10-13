@@ -1,0 +1,7 @@
+Name {{ name }}
+Contact {{ phone }}
+Email {{ email }}
+Destination {{ destination_name }}
+Depature {{ depature }}
+No. of Person {{ person }}
+Message {{ message }}

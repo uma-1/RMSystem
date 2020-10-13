@@ -1,0 +1,75 @@
+{% extends 'dashboard/dashboard_side.html' %}
+{% block content %}
+
+<div class="dashboard-content">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12 traffic">
+            <div class="dashboard-list-box">
+                <a href="{% url 'generate-excel' %}" target="_blank" class="btn btn-sm btn-success">Export all
+                    application to excel</a>
+                <h4 class="gray">Vacancy List</h4>
+                <div class="table-box">
+                    <table class="basic-table">
+                        <thead>
+                        <tr>
+                            <th> Applied Date</th>
+                            <th> Name</th>
+                            <th> Email</th>
+                            <th> Contact</th>
+                            <th> Position</th>
+                            <th> CV</th>
+                            <th> Photo</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for applicant in applicants %}
+                        <tr>
+                            <td> {{applicant.applied_date}}</td>
+                            <td> {{applicant.name}}</td>
+                            <td> {{applicant.email}}</td>
+                            <td> {{applicant.contact}}</td>
+                            <td> {{applicant.position}}</td>
+                            <td><a href="{{applicant.cv.url}}" class="btn btn-primary btn-sm" target="_blank">
+                                View CV </a></td>
+                            <td><a href="{{applicant.photo.url}}" class="btn btn-primary btn-sm" target="_blank">
+                                View Photo </a>
+                            </td>
+                            {% endfor %}
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pagination-content">
+                {% if applicants.has_other_pages %}
+                <ul class="pagination">
+                    {% if applicants.has_previous %}
+                    <li><a href="?page={{ applicants.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in applicants.paginator.page_range %}
+                    {% if applicants.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if applicants.has_next %}
+                    <li><a href="?page={{ applicants.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

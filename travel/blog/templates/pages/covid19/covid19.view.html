@@ -1,0 +1,150 @@
+{% extends 'master/master.view.html' %}
+{% block content %}
+{% include 'layouts/message.view.html' %}
+
+<!-- Breadcrumb -->
+<section class="breadcrumb-outer text-center">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2>Corona Update</h2>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Covid 19</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="section-overlay"></div>
+</section>
+<!-- BreadCrumb Ends -->
+
+<!-- Covid 19 -->
+<section class="aboutus">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <h4> Updated at : {{newsdata.latest_sit_report.updated_at}}</h4>
+                    <div class="section-icon section-icon-white">
+                        <i class="flaticon-diamond"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mypricing_content clearfix">
+                    <div class="mypricing_head_price clearfix">
+                        <div class="mypricing_head_content clearfix">
+                            <div class="head_bg"></div>
+                            <div class="head"><span>Positive Test</span></div>
+                        </div>
+                        <div class="mypricing_price_tag clearfix">
+                        <span class="price">
+                            <span class="currency">{{newsdata.tested_positive}}</span>
+                       </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mypricing_content clearfix">
+                    <div class="mypricing_head_price clearfix">
+                        <div class="mypricing_head_content clearfix">
+                            <div class="head_bg"></div>
+                            <div class="head"><span>Recovered</span></div>
+                        </div>
+                        <div class="mypricing_price_tag clearfix">
+                        <span class="price">
+                            <span class="currency">{{newsdata.recovered}}</span>
+                       </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mypricing_content clearfix">
+                    <div class="mypricing_head_price clearfix">
+                        <div class="mypricing_head_content clearfix">
+                            <div class="head_bg"></div>
+                            <div class="head"><span>Death</span></div>
+                        </div>
+                        <div class="mypricing_price_tag clearfix">
+                        <span class="price">
+                            <span class="currency">{{newsdata.deaths}}</span>
+                       </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <!-- Button trigger modal -->
+                    <input type="submit" class="btn-blue btn-red" data-toggle="modal" data-target="#exampleModal"
+                           value="More Information">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title" id="exampleModalLabel">Covid19 Extra Information</h1>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="detail-content content-wrapper">
+                                        <div class="description-content">
+                                            <table style="border-collapse:collapse;width: 100%; font-size:20px">
+                                                <thead>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <th>Details</th>
+                                                    <th>No. of Person</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Negative Test</td>
+                                                    <td>{{newsdata.tested_negative}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="title">Total Test</td>
+                                                    <td class="title">{{newsdata.tested_total}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="title">In Isolation</td>
+                                                    <td class="title">{{newsdata.in_isolation}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="title">Quarantined</td>
+                                                    <td class="title">{{newsdata.quarantined}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="title">Rdt Test</td>
+                                                    <td class="title">{{newsdata.tested_rdt}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="title">Pending Result</td>
+                                                    <td class="title">{{newsdata.pending_result}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<!-- Covid 19s Ends -->
+
+{% endblock %}

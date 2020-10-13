@@ -1,0 +1,102 @@
+{% extends 'master/master.view.html' %}
+{% block content %}
+
+{% include 'layouts/message.view.html' %}
+
+
+<!-- Breadcrumb -->
+<section class="breadcrumb-outer text-center">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2>Blogs</h2>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="section-overlay"></div>
+</section>
+<!-- BreadCrumb Ends -->
+
+<section class="destinations destination-padding">
+    <div class="container">
+        <div class="row">
+            {% for blog in blogData %}
+            <div class="col-md-4 col-sm-6">
+                <div>
+                    <div class="blog-image">
+                        <a href="{% url 'blogz-details' blog.slug %}">
+                            <img src="{{blog.image.url}}" alt="Image" height="180"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">
+                            <p><i class="fa fa-clock-o"></i>
+                                Posted On : {{blog.created}}
+                            </p>
+                        </div>
+                        <h5><a href="{% url 'blogz-details' blog.slug %}">{{blog.title}}</a></h5>
+                        <div style="text-align: justify;
+                            text-justify: inter-word;"> {{blog.description| safe |striptags| slice:':150'}}
+                        </div>
+                        <div class="blog-author">
+                            <div class="pull-left">
+                                <span class="label label-primary" style="background-color:#1877F2;"> Posted By : {{blog.posted_by}}</span>
+                            </div>
+                            <div class="pull-right blog-date-icon">
+                                <span class="label label-primary" style="background-color:#1877F2;"> View :  {{blog.page_visit}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pagination-content">
+                        <ul class="pagination">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pagination-content">
+                                        {% if blogData.has_other_pages %}
+                                        <ul class="pagination">
+                                            {% if blogData.has_previous %}
+                                            <li>
+                                                <a href="?page={{ blogData.previous_page_number }}">&laquo;</a>
+                                            </li>
+                                            {% else %}
+                                            <li class="disabled"><span>&laquo;</span></li>
+                                            {% endif %}
+                                            {% for i in blogData.paginator.page_range %}
+                                            {% if blogData.number == i %}
+                                            <li class="active"><span>{{ i }} <span
+                                                    class="sr-only">(current)</span></span></li>
+                                            {% else %}
+                                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% if blogData.has_next %}
+                                            <li><a href="?page={{ blogData.next_page_number }}">&raquo;</a>
+                                            </li>
+                                            {% else %}
+                                            <li class="disabled"><span>&raquo;</span></li>
+                                            {% endif %}
+                                        </ul>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+
+{% endblock %}

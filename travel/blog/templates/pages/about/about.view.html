@@ -1,0 +1,156 @@
+{% extends 'master/master.view.html' %}
+{% block content %}
+{% include 'layouts/message.view.html' %}
+
+<!-- Breadcrumb -->
+<section class="breadcrumb-outer text-center">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2>About Us</h2>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page">About Us</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="section-overlay"></div>
+</section>
+<!-- BreadCrumb Ends -->
+
+<!-- About Us -->
+<section class="aboutus">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <h2>Why Choose Us?</h2>
+                    <div class="section-icon section-icon-white">
+                        <i class="flaticon-diamond"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="about-item">
+                    <div class="about-icon">
+                        <i class="fa fa-superpowers" aria-hidden="true"></i>
+                    </div>
+                    <div class="about-content">
+                        <h3>Perfect Planning</h3>
+                        <p>Plan your perfect vacation with our travel agency. Choose among hundreds of all-inclusive
+                            offers!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="about-item">
+                    <div class="about-icon">
+                        <i class="fa fa-paw" aria-hidden="true"></i>
+                    </div>
+                    <div class="about-content">
+                        <h3>Secure Venues</h3>
+                        <p>We work hard to secure the best hotel rates in the most popular destinations. Search and book
+                            adventure tours now!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="about-item">
+                    <div class="about-icon">
+                        <i class="fa fa-fire" aria-hidden="true"></i>
+                    </div>
+                    <div class="about-content">
+                        <h3>Beautiful Memories</h3>
+                        <p>Book international vacation packages with us and create memories that will last a lifetime!
+                            Create History !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About Us Ends -->
+
+<!-- Our Team -->
+<section class="our-team">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <h2>Our Team</h2>
+                    <div class="section-icon section-icon-white">
+                        <i class="flaticon-diamond"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for about in teamData %}
+            <div class="col-md-3 col-sm-6 col-xs-12">
+
+                <div class="team-item">
+                    <div class="team-image">
+                        <img src="{{about.image.url}}" alt="Image">
+                    </div>
+                    <div class="team-content">
+                        <h3>{{about.name}}</h3>
+                        <p>{{about.post|slice:":30" | safe}}</p>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Our Team Ends -->
+
+
+<!-- Testimonials latest-->
+
+<section class="testimonials">
+    <div class="section-title text-center">
+        <h2>Messages</h2>
+        <div class="section-icon section-icon-white">
+            <i class="flaticon-diamond"></i>
+        </div>
+    </div>
+    <div id="testimonial_094" class="carousel slide testimonial_094_indicators thumb_scroll_x swipe_x ps_easeOutSine"
+         data-ride="carousel" data-pause="hover" data-interval="3000" data-duration="1000">
+        <!-- Wrapper For Slides -->
+        <div class="carousel-inner" role="listbox">
+            <div>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <div id="testimonial-slider" class="owl-carousel">
+                            {% for about in teamData %}
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    <p class="description" style="text-align: justify;text-justify: inter-word;">
+                                        {{about.choosedescription|safe}}
+                                    </p>
+                                </div>
+                                <div class="testimonial-profile">
+                                    <div class="pic">
+                                        <img src="{{about.image.url}}" alt="">
+                                    </div>
+                                    <h3 class="title">
+                                        {{about.name}}
+                                        <span class="post">{{about.post|slice:":30" | safe}}</span>
+                                    </h3>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /item -->
+        <!-- End of First Slide -->
+
+    </div> <!-- End Paradise Slider -->
+</section>
+<!-- Testimonials -->
+{% endblock %}

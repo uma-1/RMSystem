@@ -1,0 +1,71 @@
+{% extends 'dashboard/dashboard_side.html' %}
+{% block content %}
+<div class="dashboard-content">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12 traffic">
+            <div class="dashboard-list-box">
+                <h4 class="gray">Booking List</h4>
+                <div class="table-box">
+                    <table class="basic-table">
+                        <thead>
+                        <tr>
+                            <th> Name</th>
+
+                            <th> Contact</th>
+                            <th> Depature</th>
+                            <th>Destination</th>
+                             <th>Status</th>
+                            <th>Handle by</th>
+                            <th> View / Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for booking in bookingData %}
+                        <tr>
+                            <td> {{booking.name}}</td>
+                            <td> {{booking.contact}}</td>
+                            <td> {{booking.depature}}</td>
+                            <td> {{booking.destination_name}}</td>
+                            <td> {{booking.status}}</td>
+                            <td> {{booking.handled_by}}</td>
+                            <td> <a class="btn btn-primary" href= "{% url 'booking-edit' booking.pk  %}"> Click </a>
+                            </td>
+                            {% endfor %}
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pagination-content">
+                {% if bookingData.has_other_pages %}
+                <ul class="pagination">
+                    {% if bookingData.has_previous %}
+                    <li><a href="?page={{ bookingData.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in bookingData.paginator.page_range %}
+                    {% if bookingData.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if booking.has_next %}
+                    <li><a href="?page={{ bookingData.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

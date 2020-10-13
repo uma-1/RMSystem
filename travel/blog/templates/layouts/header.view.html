@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% if title %}
+        {{title}} | Retail Online System
+        {% else %}
+        Retail Online System
+        {% endif %}
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="fb:admins" content="salin4"/>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{title}}|Teenkanya Travel & Trek">
+    {% if image %}
+    <meta property="og:image" content="https://3kanyatravel.com.np{{image}}">
+    <meta property="og:image:secure_url" content="https://3kanyatravel.com.np{{image}}">
+    {% endif %}
+    {% if url %}
+    <meta property="og:url" content="{{url}}">
+    {% endif %}
+    <meta property="og:description" content="{{description|striptags|truncatechars:155|safe}}">
+    <meta property="og:site_name" content="Teenkaya Travel & Trek Pvt. Ltd.">
+    <meta property="og:image:alt" content="Teenkaya Travel & Trek Pvt. Ltd.[Image]">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'frontend/images/log.jpg' %}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'frontend/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <!--Custom CSS-->
+    <link href="{% static 'frontend/css/style.css' %}" rel="stylesheet" type="text/css">
+    <!--Flaticons CSS-->
+    <link href="{% static 'frontend/font/flaticon.css' %}" rel="stylesheet" type="text/css">
+    <!--Plugin CSS-->
+    <link href="{% static 'frontend/css/plugin.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'frontend/css/testimonial.css' %}" rel="stylesheet" type="text/css">
+
+
+    <!--Font Awesome-->
+    <link rel="stylesheet"
+          href="{% static 'frontend/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/popup.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+    <!--        <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">-->
+
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="upper-head clearfix">
+        <div class="container">
+            {% for contact in contactData %}
+            <div class="contact-info">
+                <p><i class="flaticon-phone-call"></i> Phone: {{contact.contact}}</p>
+                <p><i class="flaticon-mail"></i> Mail: {{contact.email}}</p>
+
+            </div>
+
+            {% endfor %}
+
+            <div class="login-btn pull-right">
+                <div class="login-btn pull-right">
+                    <a href="{% url 'login' %}"><i class="fa fa-unlock-alt"></i> Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header Ends -->
+
+<!-- Navigation Bar -->
+<div class="navigation">
+    <div class="container">
+        <div class="navigation-content">
+            <div class="header_menu">
+                <!-- start Navbar (Header) -->
+                <nav class="navbar navbar-default navbar-sticky-function navbar-arrow">
+                    <div class="logo pull-left">
+                        <a href="{% url 'index' %}"><img alt="Retail Online System"
+                                                         src="{% static 'frontend/images/c.png' %}"></a>
+                    </div>
+                    <div id="navbar" class="navbar-nav-wrapper">
+                        <ul class="nav navbar-nav" id="responsive-menu">
+                            <li class="active">
+                                <a href="{% url 'index' %}">Home</a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'about' %}"> About us </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'contact' %}">Contact us </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'destination' %}"> Goods Item <i class="fa fa-angle-down"></i></a>
+                                <ul>
+                                    {% for destinationcategory in destinationCategory %}
+                                    {% if destinationcategory.destination_set.all %}
+                                    <li>
+                                        <a href="{% url 'descat-details' destinationcategory.slug %}">{{destinationcategory.name}}</a>
+                                        <ul>
+                                            {% for sub in destinationcategory.destination_set.all %}
+                                            <li><a href="{% url 'destination-details' sub.slug %}">{{sub.title}}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    {% else %}
+                                    <li><a>{{destinationcategory.name}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'blogz' %}">Blog </a>
+
+                            </li>
+
+                            <li>
+                                <a href="{% url 'vacancy' %}">Carrer </a>
+
+                            </li>
+
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                    <br>
+                    <div class="login-btn pull-right">
+                        <div id="fb-root"></div>
+                        <div class="fb-like"
+                             data-href="https://www.facebook.com/Teenkanya-Travell-Trek-107162107529854/"
+                             data-width="1" data-layout="button_count" data-action="like" data-size="small"
+                             data-share="true">
+                        </div>
+                    </div>
+                </nav>
+                <div id="slicknav-mobile"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navigation Bar Ends -->

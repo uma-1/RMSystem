@@ -1,0 +1,322 @@
+{% extends 'master/master.view.html' %}
+{% block content %}
+{% include 'layouts/popup.html' %}
+{% load static %}
+
+{% include 'layouts/message.view.html' %}
+<!-- Banner start -->
+<section class="swiper-banner">
+    <div class="slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for banner in bannerData %}
+                <div class="swiper-slide" style="background-image:url({{banner.image.url}})">
+                    <div class="swiper-content" data-animation="animated fadeInDown">
+                        <h2>{{banner.heading2}}</h2>
+                        <h1>{{banner.heading1}}</h1>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="overlay"></div>
+    </div>
+</section>
+<!-- Banner Ends -->
+
+
+<!-- Search Box -->
+<div class="search-box clearfix">
+    <div class="container">
+        <div class="search-outer">
+            <div class="search-content">
+                <form method="GET" action="{% url 'search'%}">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-6">
+                            <div class="search-ad">
+                                <p>Book Your <span>Trip</span></p>
+                                <i class="flaticon-sun-umbrella "></i>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="table_item">
+
+                                <div class="form-group">
+                                    <input name="q" type="text" class="form-control" placeholder="Search Now"
+                                           value="{{request.GET.q}}" required>
+                                    <span class="search_btn"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="table_item">
+                                <div class="search">
+                                    <input type="submit" class="btn-blue btn-red" value="Search"
+                                           style="padding: 9px 107px; ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-6">
+                            <div class="search-ad">
+                                <p>With<span>3kanya</span></p>
+                                <i class="flaticon-sun-umbrella "></i>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search Box Ends -->
+
+
+<!-- Popular Non nepalese Packages -->
+<section class="popular-packages">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Popular Packages For Online Shopping</h2>
+            <div class="section-icon">
+                <i class="flaticon-diamond"></i>
+            </div>
+            <!--            <p>Teenkany's Best Package </p>-->
+        </div>
+        <div class="row package-slider slider-button">
+            {% for destination in destinationData %}
+            <div class="col-sm-4">
+                <div class="package-item">
+                    <div class="package-image">
+                        <img src="{{destination.image.url}}" alt="{{destination.title}}" height="250">
+                        <div class="package-price">
+                            <div class="deal-rating">
+                                {% with ''|center:destination.star as range %}
+                                {% for i in range %}
+                                <span class="fa fa-star checked"></span>
+                                {% endfor %}
+                                {% endwith %}
+                            </div>
+                            <p>{{destination.price}} / Person </p>
+                            <div style="color:#f5f5f5;"><i
+                                    class="flaticon-time"></i> {{destination.day}} Days
+                            </div>
+                        </div>
+                    </div>
+                    <div class="package-content">
+                        <h4>{{destination.title}}</h4>
+                        <!--                        <p>{{destination.description}}</p>-->
+                        <div class="package-info">
+                            <a href="{% url 'destination-details' destination.slug %}" class="btn-blue btn-red">View
+                                more details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Popular Packages Ends -->
+
+
+<!-- Popular Nepalese Packages -->
+<section class="aboutus">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Popular Packages For our Retail Customers</h2>
+            <div class="section-icon">
+                <i class="flaticon-diamond"></i>
+            </div>
+            <!--            <p>Teenkany's Best Package </p>-->
+        </div>
+        {% if destinationDataNepal %}
+        <div class="row package-slider slider-button">
+            {% for destination in destinationDataNepal %}
+            <div class="col-sm-4">
+                <div class="package-item">
+                    <div class="package-image">
+                        <img src="{{destination.image.url}}" alt="{{destination.title}}" height="250">
+                        <div class="package-price">
+                            <div class="deal-rating">
+                                {% with ''|center:destination.star as range %}
+                                {% for i in range %}
+                                <span class="fa fa-star checked"></span>
+                                {% endfor %}
+                                {% endwith %}
+                            </div>
+                            <p><span>{{destination.price}}</span> / Per </p>
+                            <div style="color:white;"><span><i
+                                    class="flaticon-time"></i> {{destination.day}} Days</span></div>
+                        </div>
+                    </div>
+                    <div class="package-content">
+                        <h4>{{destination.title}}</h4>
+                        <!--                        <p>{{destination.description}}</p>-->
+                        <div class="package-info">
+                            <a href="{% url 'destination-details' destination.slug %}" class="btn-blue btn-red">View
+                                more details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div style="text-align:center;">
+            <br>
+            <h3> We will soon update the package</h3>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+<!-- Popular Packages Ends -->
+
+<!-- About Us -->
+<section class="aboutus">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <h2>Why Choose Us?</h2>
+                    <div class="section-icon section-icon-white">
+                        <i class="flaticon-diamond"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="about-item">
+                    <div class="about-icon">
+                        <i class="fa fa-superpowers" aria-hidden="true"></i>
+                    </div>
+                    <div class="about-content">
+                        <h3>Perfect PLace to Shop</h3>
+                        <p>Shop with your great heart and have a great price in every items</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="about-item">
+                    <div class="about-icon">
+                        <i class="fa fa-paw" aria-hidden="true"></i>
+                    </div>
+                    <div class="about-content">
+                        <h3>Secure Payment</h3>
+                        <p>Secure online payment with various payment methods</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="about-item">
+                    <div class="about-icon">
+                        <i class="fa fa-fire" aria-hidden="true"></i>
+                    </div>
+                    <div class="about-content">
+                        <h3>Beautiful Memories</h3>
+                        <p>A very good and friendly environment to shop </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About Us -->
+
+<!-- TeamView -->
+<section class="testimonials">
+    <div class="section-title text-center">
+        <h2>Team View</h2>
+        <div class="section-icon section-icon-white">
+            <i class="flaticon-diamond"></i>
+        </div>
+        <p>Know more about us from our team</p>
+    </div>
+    <div id="testimonial_094" class="carousel slide testimonial_094_indicators thumb_scroll_x swipe_x ps_easeOutSine"
+         data-ride="carousel" data-pause="hover" data-interval="3000" data-duration="1000">
+        <!-- Wrapper For Slides -->
+        <div class="carousel-inner" role="listbox">
+            <div>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <div id="testimonial-slider" class="owl-carousel">
+                            {% for about in teamData %}
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    <p class="description" style="text-align: justify;">
+                                        {{about.choosedescription|safe}}
+                                    </p>
+                                </div>
+                                <div class="testimonial-profile">
+                                    <div class="pic">
+                                        <img src="{{about.image.url}}" alt="">
+                                    </div>
+                                    <h3 class="title">
+                                        {{about.name}}
+                                        <span class="post">{{about.post|slice:":30" | safe}}</span>
+                                    </h3>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /item -->
+        <!-- End of First Slide -->
+
+    </div> <!-- End Paradise Slider -->
+</section>
+<!-- End TeamView -->
+
+<!-- Customer View -->
+<section class="container">
+    <div class="section-title text-center">
+        <h2>Customer View</h2>
+        <div class="section-icon">
+            <i class="flaticon-diamond"></i>
+        </div>
+        <p>What our customer think about us</p>
+    </div>
+    {% include 'layouts/hometestimonial.html' %}
+</section>
+<!-- End Customer View -->
+
+<!-- Trusted Partners -->
+<section class="trusted-partners">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-xs-4">
+                <div class="partners-title">
+                    <h3>Our <span>Partners</span></h3>
+                </div>
+            </div>
+            <div class="col-md-9 col-xs-8">
+                <ul class="partners-logo partners-slider">
+                    <li><a><img src="{% static 'frontend/images/rotary.png' %}" alt="Image"></a></li>
+                    <li><a href=https://www.isolutioninternational.com><img
+                            src="{% static 'frontend/images/isolution.png' %}"
+                            alt="Image"></a></li>
+                    <li><a href=https://kanchanjungatravel.com/><img src="{% static 'frontend/images/kanchan.png' %}"
+                                                                     alt="Image"></a></li>
+                    <li><a><img src="{% static 'frontend/images/rotary1.png' %}" alt="Image"></a></li>
+                    <li><img src="{% static 'frontend/images/flight_grid_1.png' %}" alt="Image"></li>
+                    <li><img src="{% static 'frontend/images/flight_grid_2.png' %}" alt="Image"></li>
+                    <li><img src="{% static 'frontend/images/flight_grid_3.png' %}" alt="Image"></li>
+                    <li><img src="{% static 'frontend/images/flight_grid_4.png' %}" alt="Image"></li>
+                    <li><img src="{% static 'frontend/images/flight_grid_5.png' %}" alt="Image"></li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Trusted Partners Ends -->
+
+
+{% endblock %}

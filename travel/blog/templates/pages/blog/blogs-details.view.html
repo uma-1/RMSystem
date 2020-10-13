@@ -1,0 +1,87 @@
+{% extends 'master/master.view.html' %}
+{% block content %}
+<!-- Breadcrumb -->
+<section class="breadcrumb-outer text-center">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2>Blog</h2>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'blogz' %}">Blog</a></li>
+                    <li class="breadcrumb-item" aria-current="page">Blog Details</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{blogzdetails.title}}</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="section-overlay"></div>
+</section>
+<!-- BreadCrumb Ends -->
+
+<!-- Detail -->
+<section class="item-content">
+    <div class="container">
+        <div class="row">
+
+            <div class="item-wrapper">
+                <div class="cover-content" style="padding:0px 20px;">
+                    <h2>{{blogzdetails.title}}</h2>
+                    <div class="author-detail" >
+
+                            <span class="label label-primary" style="background-color:#1877F2;"><i
+                                    class="fa fa-clock-o"></i> Posted On : {{blogzdetails.created}}</span>
+                        <span class="blog-date-icon">
+                            <span class="label label-primary" style="background-color:#1877F2;"> View : {{blogzdetails.page_visit}}</span>
+                                <div class="fb-like"
+                                     data-href="http://127.0.0.1:8000/blogz-details/{{blogzdetails.slug}}"
+                                     data-width="" data-layout="button_count" data-action="like" data-size="small"
+                                     data-share="false">
+
+                                </div>
+
+                                   <div class="fb-share-button"
+                                        data-href="http://127.0.0.1:8000/blogz-details/{{blogzdetails.slug}}"
+                                        data-layout="button_count" data-size="small"><a target="_blank"
+                                                                                        href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fblogz-details%2F&amp;src=sdkpreparse"
+                                                                                        class="fb-xfbml-parse-ignore">Share</a></div>
+                                </span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="cover-image">
+                        <img src="{{blogzdetails.image.url}}" alt="{{blogzdetails.title}}">
+                    </div>
+                </div>
+                <div class="item-detail" style="padding:0px 20px;">
+                    <p class="articlepara"> {{blogzdetails.description | safe}}</p>
+                </div>
+                <div class="comment-box" style="padding:0px 20px 20px;">
+                    <h3>Comments</h3>
+                    <ul class="comment-list">
+                        <li>
+                            <div id="fb-root"></div>
+                            <div class="fb-comments"
+                                 data-href="http://127.0.0.1:8000/blogz-details/{{blogzdetails.slug}}"
+                                 data-width=""
+                                 data-numposts="">
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- back to top start -->
+<div id="back-to-top">
+    <a href="#"></a>
+</div>
+
+
+</body>
+</html>
+
+
+{% endblock %}
